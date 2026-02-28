@@ -1,4 +1,5 @@
 import os
+import uuid
 
 from fastapi.testclient import TestClient
 from sqlalchemy import create_engine
@@ -29,8 +30,9 @@ client = TestClient(app)
 
 
 def test_create_and_get_user():
+    unique_email = f"test-{uuid.uuid4().hex[:8]}@example.com"
     payload = {
-        "email": "test@example.com",
+        "email": unique_email,
         "full_name": "Test User",
         "password": "StrongPass123",
     }
